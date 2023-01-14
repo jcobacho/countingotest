@@ -1,0 +1,73 @@
+[
+  {
+    "model": "announcement.technology",
+    "pk": 1,
+    "fields": {
+      "name": "Angular",
+      "description": ""
+    }
+  },{
+    "model": "announcement.technology",
+    "pk": 2,
+    "fields": {
+      "name": "Vue",
+      "description": ""
+    }
+  },{
+    "model": "announcement.technology",
+    "pk": 3,
+    "fields": {
+      "name": "React native",
+      "description": ""
+    }
+  },{
+    "model": "announcement.technology",
+    "pk": 4,
+    "fields": {
+      "name": "CSS",
+      "description": ""
+    }
+  },{
+    "model": "announcement.technology",
+    "pk": 5,
+    "fields": {
+      "name": "Sprintboot",
+      "description": ""
+    }
+  },{
+    "model": "announcement.technology",
+    "pk": 6,
+    "fields": {
+      "name": "Odoo",
+      "description": ""
+    }
+  },{
+    "model": "announcement.technology",
+    "pk": 7,
+    "fields": {
+      "name": "React",
+      "description": ""
+    }
+  },{
+    "model": "announcement.technology",
+    "pk": 8,
+    "fields": {
+      "name": "Python",
+      "description": ""
+    }
+  },{
+    "model": "announcement.technology",
+    "pk": 9,
+    "fields": {
+      "name": "HTML",
+      "description": ""
+    }
+  },{
+    "model": "announcement.technology",
+    "pk": 10,
+    "fields": {
+      "name": "AWS",
+      "description": ""
+    }
+  }
+]
