@@ -1,0 +1,8 @@
+coreapi
+Django<=3.3
+djangorestframework
+django-rest-auth
+python-decouple
+
+# F
+factory-boy

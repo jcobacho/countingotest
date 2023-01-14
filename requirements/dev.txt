@@ -1,0 +1,6 @@
+-r ../requirements/base.txt
+
+django-extensions
+flake8
+black
+ipython
