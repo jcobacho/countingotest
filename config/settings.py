@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     # 3rd party apps
 
     # local apps
-    'candidates'
+    'accounts',
+    'announcement',
+    'entity'
 ]
 
 MIDDLEWARE = [
@@ -53,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+AUTH_USER_MODEL = "accounts.User"
 
 ROOT_URLCONF = 'config.urls'
 
