@@ -38,7 +38,7 @@ def mark_selected(self, request, queryset):
 
 @admin.register(Candidate)
 class CandidateAdmin(admin.ModelAdmin):
-    list_display = ('id', 'first_name', 'last_name', 'ci', 'announcement', 'age', 'sex')
+    list_display = ('id', 'first_name', 'last_name', 'ci', 'announcement', 'age', 'sex', 'get_techs')
     search_fields = ('first_name', 'last_name')
     list_filter = ('announcement', 'sex')
 
@@ -49,6 +49,9 @@ class CandidateAdmin(admin.ModelAdmin):
     ]
 
     actions = [mark_selected]
+
+    def get_techs(self, obj):
+        return ", ".join([f'{t.tech.name} - {str(t.years_of_experience)}' for t in obj.candidatetech_set.all()])
     #
     # @admin.display(description='First Name', ordering='user__first_name')
     # def get_first_name(self, obj):

@@ -1,0 +1,9 @@
+<div class="d-flex flex-shrink-0">
+
+<ul>
+    {% for ct in record.candidatetech_set.all %}
+    <li>{{ct.tech.name}} - {{ ct.years_of_experience }}</li>
+
+
+    {% endfor %}
+</ul>

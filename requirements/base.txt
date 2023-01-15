@@ -1,6 +1,9 @@
 coreapi
 Django<=3.3
 djangorestframework
+django-filter
+django-tables2
+django-widget-tweaks
 django-rest-auth
 python-decouple
 
