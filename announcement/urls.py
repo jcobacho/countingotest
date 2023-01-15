@@ -17,7 +17,7 @@ Including another URLconf
 from django.urls import path, include
 
 from announcement.views import ListCandidatesView, ListAnnouncements, CreateAnnouncementView, UpdateAnnouncementView, \
-    CreateCandidateView
+    CreateCandidateView, UpdateCandidateView
 
 urlpatterns = [
 
@@ -28,5 +28,6 @@ urlpatterns = [
 
     path('candidates/', ListCandidatesView.as_view(), name='candidate_list'),
     path('candidates/new/', CreateCandidateView.as_view(), name='candidate_create'),
+    path('candidates/<pk>/edit/', UpdateCandidateView.as_view(), name='candidate_update'),
 
 ]
