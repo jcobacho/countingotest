@@ -24,6 +24,7 @@ urlpatterns = [
     path('annoucements/', ListAnnouncements.as_view(), name='announcement_list'),
     path('annoucements/new/', CreateAnnouncementView.as_view(), name='announcement_create'),
     path('annoucements/<pk>/edit', UpdateAnnouncementView.as_view(), name='announcement_update'),
+
     path('api/announcements/', include('announcement.api.urls')),
 
     path('candidates/', ListCandidatesView.as_view(), name='candidate_list'),

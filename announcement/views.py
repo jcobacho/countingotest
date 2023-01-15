@@ -55,7 +55,8 @@ class ListCandidatesView(SingleTableMixin, FilterView):
 class CreateCandidateView(CreateView):
     template_name = 'announcement/candidate/form.html'
     form_class = CandidateForm
-    formset_class = inlineformset_factory(Candidate, CandidateTech, fields=('tech', 'years_of_experience'), extra=1, can_delete=False)
+    formset_class = inlineformset_factory(Candidate, CandidateTech, fields=('tech', 'years_of_experience'),
+                                          min_num=1, validate_min=True, extra=1, can_delete=False)
 
     success_url = reverse_lazy('candidate_list')
 
@@ -110,7 +111,8 @@ class CreateCandidateView(CreateView):
 class UpdateCandidateView(UpdateView):
     template_name = 'announcement/candidate/form.html'
     form_class = CandidateForm
-    formset_class = inlineformset_factory(Candidate, CandidateTech, fields=('tech', 'years_of_experience'), extra=0, can_delete=True)
+    formset_class = inlineformset_factory(Candidate, CandidateTech, fields=('tech', 'years_of_experience'), extra=0,
+                                          min_num=1, validate_min=True, can_delete=True)
     queryset = Candidate.objects.all()
     success_url = reverse_lazy('candidate_list')
 
