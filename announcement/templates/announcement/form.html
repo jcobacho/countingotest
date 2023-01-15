@@ -1,0 +1,80 @@
+{% extends "frontend/admin/base.html" %}
+{% load static i18n widget_tweaks %}
+{% block toolbar %}
+{% endblock %}
+{% block content %}
+
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+
+            <!--begin::Form-->
+            <form id="#kt-form" class="form d-flex flex-column flex-lg-row" method="post">
+                {% csrf_token %}
+                <!--begin::Main column-->
+                <div class="d-flex flex-column flex-row-fluid align-items-center gap-7 gap-lg-10">
+
+                    <div class="">
+                        <!--begin::General options-->
+                        <div class="card card-flush py-4">
+                            <!--begin::Card header-->
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <h2>New Announcement</h2>
+                                </div>
+                            </div>
+                            <!--end::Card header-->
+                            <!--begin::Card body-->
+                            <div class="card-body pt-0">
+                                <!--begin::Input group-->
+                                <div class="mb-10 fv-row">
+
+                                    {% include 'frontend/form_snippets/text_input.html' with field=form.name %}
+
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div>
+                                    {% include 'frontend/form_snippets/text_input.html' with field=form.description %}
+
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <!--end::Card header-->
+                        </div>
+                        <!--end::General options-->
+
+                    </div>
+
+                    <!--end::Tab content-->
+                    <div class="d-flex justify-content-end">
+                        <!--begin::Button-->
+                        <a href="{% url 'announcement_list' %}"
+                           id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancel</a>
+                        <!--end::Button-->
+                        <!--begin::Button-->
+                        <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
+                            <span class="indicator-label">{% trans "Save Changes" %}</span>
+                            <span class="indicator-progress">{% trans "Please wait..." %}
+    												<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                        <!--end::Button-->
+                    </div>
+                </div>
+                <!--end::Main column-->
+            </form>
+            <!--end::Form-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+
+{% endblock %}
+{% block styles %}
+    {{ form.media.css }}
+
+{% endblock %}
+{% block scripts %}
+    {{ form.media.js }}
+{% endblock %}

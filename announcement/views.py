@@ -1,9 +1,11 @@
 # Create your views here.
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin, SingleTableView
 
 from announcement.filters import CandidateFilter, AnnouncementFilter
+from announcement.forms import AnnouncementForm
 from announcement.models import Announcement, Candidate
 from announcement.tables import AnnouncementTable, CandidateTable
 
@@ -20,6 +22,12 @@ class ListAnnouncements(SingleTableMixin, FilterView):
     def get_context_data(self, **kwargs):
         kwargs.update({'page_title': "Announcements"})
         return super(ListAnnouncements, self).get_context_data(**kwargs)
+
+
+class CreateAnnouncementView(CreateView):
+    template_name = 'announcement/form.html'
+    form_class = AnnouncementForm
+    success_url = reverse_lazy('announcement_list')
 
 
 class ListCandidatesView(SingleTableMixin, FilterView):
