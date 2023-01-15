@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.urls import path
+from django.urls import path, include
 
 from announcement.views import ListCandidatesView, ListAnnouncements, CreateAnnouncementView, UpdateAnnouncementView
 
@@ -23,6 +23,8 @@ urlpatterns = [
     path('annoucements/', ListAnnouncements.as_view(), name='announcement_list'),
     path('annoucements/new/', CreateAnnouncementView.as_view(), name='announcement_create'),
     path('annoucements/<pk>/edit', UpdateAnnouncementView.as_view(), name='announcement_update'),
+    path('api/announcements/', include('announcement.api.urls')),
+
     path('candidates/', ListCandidatesView.as_view(), name='candidate_list'),
 
 ]
