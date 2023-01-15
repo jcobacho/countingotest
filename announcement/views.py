@@ -1,6 +1,6 @@
 # Create your views here.
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin, SingleTableView
 
@@ -28,6 +28,13 @@ class CreateAnnouncementView(CreateView):
     template_name = 'announcement/form.html'
     form_class = AnnouncementForm
     success_url = reverse_lazy('announcement_list')
+
+
+class UpdateAnnouncementView(UpdateView):
+    template_name = 'announcement/form.html'
+    form_class = AnnouncementForm
+    success_url = reverse_lazy('announcement_list')
+    model = Announcement
 
 
 class ListCandidatesView(SingleTableMixin, FilterView):

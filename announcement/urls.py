@@ -16,12 +16,13 @@ Including another URLconf
 
 from django.urls import path
 
-from announcement.views import ListCandidatesView, ListAnnouncements, CreateAnnouncementView
+from announcement.views import ListCandidatesView, ListAnnouncements, CreateAnnouncementView, UpdateAnnouncementView
 
 urlpatterns = [
 
-    path('', ListAnnouncements.as_view(), name='announcement_list'),
-    path('new/', CreateAnnouncementView.as_view(), name='announcement_create'),
+    path('annoucements/', ListAnnouncements.as_view(), name='announcement_list'),
+    path('annoucements/new/', CreateAnnouncementView.as_view(), name='announcement_create'),
+    path('annoucements/<pk>/edit', UpdateAnnouncementView.as_view(), name='announcement_update'),
     path('candidates/', ListCandidatesView.as_view(), name='candidate_list'),
 
 ]
