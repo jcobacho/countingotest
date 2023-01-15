@@ -103,7 +103,7 @@
                                                 <div class="formset-list">
                                                     {{ formset.management_form }}
 
-{#                                                    {% include 'frontend/form_snippets/formset_non_field_errors.html' with formset_errors=formset.non_form_errors %}#}
+                                                    {% include 'frontend/form_snippets/formset_non_field_errors.html' with formset_errors=formset.non_form_errors %}
 
                                                     {% for form in formset %}
                                                         {% include 'announcement/candidate/tech_formset.html' with formset=form can_delete=formset.can_delete %}

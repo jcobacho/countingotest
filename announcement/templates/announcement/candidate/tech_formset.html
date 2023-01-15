@@ -3,6 +3,9 @@
     <div class="{% if empty_form %}d-none {% endif %}" id="tech_empty_form">
 {% endif %}
 
+    {% if '__all__' in formset.errors.keys %}
+        {% include 'frontend/form_snippets/formset_non_field_errors.html' with formset_errors=formset.errors.values %}
+    {% endif %}
 
     <div id="{{ formset.prefix }}" class="formset-row" {% if formset.DELETE and formset.DELETE.value %}
          style="display: none;" {% endif %}>

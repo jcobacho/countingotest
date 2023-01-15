@@ -157,7 +157,6 @@ class UpdateCandidateView(UpdateView):
         return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form, formset):
-
         """If the form is invalid, render the invalid form."""
         return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
