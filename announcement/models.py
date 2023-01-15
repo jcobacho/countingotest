@@ -41,6 +41,9 @@ class Candidate(User):
         verbose_name = "Candidate"
         verbose_name_plural = "Candidates"
 
+    def get_delete_url(self):
+        return reverse("candidate-detail", kwargs={"pk": self.pk})
+
 
 class CandidateTech(models.Model):
     tech = models.ForeignKey(Technology, on_delete=models.CASCADE)
