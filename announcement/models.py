@@ -12,6 +12,9 @@ class Announcement(models.Model):
     def __str__(self):
         return self.name
 
+    def get_edit_url(self):
+        return reverse("announcement_update", kwargs={"pk": self.pk})
+
     def get_delete_url(self):
         return reverse("announcement-detail", kwargs={"pk": self.pk})
 
@@ -40,6 +43,9 @@ class Candidate(User):
     class Meta(User.Meta):
         verbose_name = "Candidate"
         verbose_name_plural = "Candidates"
+
+    def get_edit_url(self):
+        return reverse("candidate_update", kwargs={"pk": self.pk})
 
     def get_delete_url(self):
         return reverse("candidate-detail", kwargs={"pk": self.pk})
