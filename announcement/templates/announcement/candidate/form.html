@@ -1,0 +1,178 @@
+{% extends "frontend/admin/base.html" %}
+{% load static i18n widget_tweaks %}
+{% block toolbar %}
+{% endblock %}
+{% block content %}
+
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+
+            <!--begin::Form-->
+            <form id="#kt-form" class="form d-flex flex-column " method="post">
+                {% csrf_token %}
+
+                <!--begin::Main column-->
+                <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+                    <!--begin:::Tabs-->
+                    <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
+                        <!--begin:::Tab item-->
+                        <li class="nav-item">
+                            <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab"
+                               href="#kt_add_product_general">{% trans "General" %}</a>
+                        </li>
+                        <!--end:::Tab item-->
+
+                        <!--begin:::Tab item-->
+                        <li class="nav-item">
+                            <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
+                               href="#kt_add_technologies">{% trans "Technologies" %}</a>
+                        </li>
+                        <!--end:::Tab item-->
+
+                    </ul>
+                    <!--end:::Tabs-->
+                    <!--begin::Tab content-->
+                    <div class="tab-content">
+                        <!--begin::Tab pane-->
+                        <div class="tab-pane fade show active" id="kt_add_product_general" role="tab-panel">
+                            <div class="d-flex flex-column gap-7 gap-lg-10">
+                                <!--begin::General options-->
+                                <div class="card card-flush py-4">
+                                    <!--begin::Card header-->
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>{% trans "General" %}</h2>
+                                        </div>
+                                    </div>
+                                    <!--end::Card header-->
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+
+                                            {% include 'frontend/form_snippets/text_input.html' with field=form.first_name %}
+                                            {% include 'frontend/form_snippets/text_input.html' with field=form.middle_name %}
+                                            {% include 'frontend/form_snippets/text_input.html' with field=form.last_name %}
+
+
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div>
+                                            {% include 'frontend/form_snippets/text_input.html' with field=form.ci %}
+                                            {% include 'frontend/form_snippets/text_input.html' with field=form.address %}
+                                            {% include 'frontend/form_snippets/text_input.html' with field=form.age %}
+                                            {% include 'frontend/form_snippets/select_input.html' with field=form.sex %}
+                                            {% include 'frontend/form_snippets/select_input.html' with field=form.announcement %}
+
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                    <!--end::Card header-->
+                                </div>
+                                <!--end::General options-->
+
+                            </div>
+                        </div>
+                        <!--end::Tab pane-->
+                        <!--begin::Tab pane-->
+                        <div class="tab-pane fade" id="kt_add_technologies" role="tab-panel">
+                            <div class="d-flex flex-column gap-7 gap-lg-10">
+
+                                <div class="card card-flush py-4">
+                                    <!--begin::Card header-->
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>{% trans 'Technologies' %}</h2>
+                                        </div>
+                                    </div>
+                                    <!--end::Card header-->
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+
+
+                                        <!--begin::Input group-->
+                                        <div class="" >
+                                            <!--begin::Label-->
+                                            <!--end::Label-->
+                                            <!--begin::Repeater-->
+                                            <div class="formset_container" data-formset_prefix="{{ formset.prefix }}">
+                                                <!--begin::Form group-->
+                                                <div class="formset-list">
+                                                    {{ formset.management_form }}
+
+{#                                                    {% include 'frontend/form_snippets/formset_non_field_errors.html' with formset_errors=formset.non_form_errors %}#}
+
+                                                    {% for form in formset %}
+                                                        {% include 'announcement/candidate/tech_formset.html' with formset=form can_delete=formset.can_delete %}
+
+                                                    {% endfor %}
+                                                </div>
+                                                <!--end::Form group-->
+                                                <!--begin::Form group-->
+                                                <div class="form-group">
+                                                    <a href="javascript:;" class="btn btn-light-primary add-form-row">
+                                                        <i class="la la-plus"></i>{% trans "Add Another Technology" %}
+                                                    </a>
+                                                </div>
+                                                    <!--end::Form group-->
+                                                <!--end::Form group-->
+                                            </div>
+                                            <!--end::Repeater-->
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                    <!--end::Card header-->
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--end::Tab pane-->
+
+                    </div>
+                    <!--end::Tab content-->
+                    <div class="d-flex justify-content-end">
+                        <!--begin::Button-->
+                        <a href="{% url 'candidate_list' %}"
+                           id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancel</a>
+                        <!--end::Button-->
+                        <!--begin::Button-->
+                        <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
+                            <span class="indicator-label">{% trans "Save Changes" %}</span>
+                            <span class="indicator-progress">{% trans "Please wait..." %}
+    												<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                        <!--end::Button-->
+                    </div>
+                </div>
+
+                <!--end::Main column-->
+            </form>
+            <!--end::Form-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+
+    {% include 'announcement/candidate/tech_formset.html' with formset=formset.empty_form empty_form=True %}
+
+{% endblock %}
+{% block styles %}
+    {{ form.media.css }}
+
+{% endblock %}
+{% block scripts %}
+    {{ form.media.js }}
+
+    <script src="{% static 'frontend/js/custom-form-duplicator.js' %}"></script>
+    <script>
+        var techs_formset = new DjangoFormDuplicator($("#tech_empty_form"), "{{ formset.prefix }}");
+        techs_formset.init()
+    </script>
+
+    <!--end::Page Vendors Javascript-->
+    <!--begin::Page Custom Javascript(used by this page)-->
+    {#        <script src="{% static 'frontend/assets/js/custom/apps/ecommerce/catalog/save-product.js' %}"></script>#}
+{% endblock %}

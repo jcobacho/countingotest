@@ -16,7 +16,8 @@ Including another URLconf
 
 from django.urls import path, include
 
-from announcement.views import ListCandidatesView, ListAnnouncements, CreateAnnouncementView, UpdateAnnouncementView
+from announcement.views import ListCandidatesView, ListAnnouncements, CreateAnnouncementView, UpdateAnnouncementView, \
+    CreateCandidateView
 
 urlpatterns = [
 
@@ -26,5 +27,6 @@ urlpatterns = [
     path('api/announcements/', include('announcement.api.urls')),
 
     path('candidates/', ListCandidatesView.as_view(), name='candidate_list'),
+    path('candidates/new/', CreateCandidateView.as_view(), name='candidate_create'),
 
 ]

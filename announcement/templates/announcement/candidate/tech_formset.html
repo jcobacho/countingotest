@@ -1,0 +1,33 @@
+{% load widget_tweaks %}
+{% if empty_form %}
+    <div class="{% if empty_form %}d-none {% endif %}" id="tech_empty_form">
+{% endif %}
+
+
+    <div id="{{ formset.prefix }}" class="formset-row" {% if formset.DELETE and formset.DELETE.value %}
+         style="display: none;" {% endif %}>
+        {{ formset.id }}
+
+        <div class="form-group row mb-5">
+            <div class="col-md-3">
+                {% include 'frontend/form_snippets/select_input.html' with field=formset.tech exclude_label=True %}
+
+{#                {% include 'frontend/form_snippets/select_input.html' with field=formset.tech exclude_label=True %}#}
+            </div>
+            <div class="col-md-4">
+                {% include 'frontend/form_snippets/text_input.html' with field=formset.years_of_experience exclude_label=True %}
+            </div>
+            <div class="col-md-2">
+                <a href="javascript:;" class="btn btn-sm btn-light-danger mt-1 remove-form-row" data-form_prefix="{{ formset.prefix }}">
+                    <i class="la la-trash-o fs-3"></i>
+                </a>
+                {% if formset.instance.id and can_delete %}
+                    {% render_field formset.DELETE style="display:none;" %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% if empty_form %}
+    </div>
+{% endif %}

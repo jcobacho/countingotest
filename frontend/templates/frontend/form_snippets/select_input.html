@@ -1,0 +1,25 @@
+{% load widget_tweaks %}<!--begin::Input group-->
+<!--begin::Label-->
+{% if not exclude_label %}
+    <label class="form-label {% if field.field.required %}required{% endif %}">{{field.label}}</label>
+{% endif %}
+<!--end::Label-->
+<!--begin::Select2-->
+{% if field.errors %}
+{#    data-control="select2" data-placeholder="Select an option" data-allow-clear="true"#}
+    {% render_field field class+="form-select is-invalid" data-control="select2"%}
+
+{% else %}
+    {% render_field field class+="form-select" data-control="select2"%}
+
+{% endif %}
+<!--end::Select2-->
+{% if field.errors %}
+<div class="invalid-feedback">
+    {{field.errors}}
+</div>
+{% endif %}
+<!--begin::Description-->
+<div class="text-muted fs-7 mb-7">{{ field.help_text }}</div>
+<!--end::Description-->
+<!--end::Input group-->
