@@ -51,7 +51,7 @@ License: For each use you must have a valid license purchased only from above li
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
-	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed" style="--kt-toolbar-height:0px;--kt-toolbar-height-tablet-and-mobile:0px">
+    <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
 		<!--begin::Main-->
 		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">
@@ -72,6 +72,7 @@ License: For each use you must have a valid license purchased only from above li
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Toolbar-->
                         {% block toolbar %}
+
                         {% endblock %}
 						<!--end::Toolbar-->
 						<!--begin::Post-->
@@ -117,7 +118,6 @@ License: For each use you must have a valid license purchased only from above li
 
 		<!--end::Modals-->
 		<!--begin::Javascript-->
-        <script>var hostUrl = "{% static 'frontend/assets' %}";</script>
 
 {#		<!--begin::Global Javascript Bundle(used by all pages)-->#}
         <script src="{% static 'frontend/assets/plugins/global/plugins.bundle.js' %}"></script>

@@ -7,6 +7,10 @@
     {{ filter.form.media.css }}
 
 {% endblock %}
+{% block toolbar %}
+
+    {% include 'announcement/candidate/toolbar.html' %}
+{% endblock %}
 {% block content %}
 
     <div class="post d-flex flex-column-fluid">
@@ -15,62 +19,85 @@
             <div class="card mb-5 mb-xl-8">
                 <!--begin::Header-->
                 <div class="card-header border-0 pt-5">
-                    <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bolder fs-3 mb-1">{{page_title}}</span>
-                    </h3>
+                    <form id="filter_form" method="get" style="width: 100%;">
+                    <div class="card-toolbar flex-row-fluid justify-content-start gap-5">
 
-                    <form id="filter_form" method="get">
-
-                    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-
-                        <div class="d-flex align-items-center position-relative my-1">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                                                    <span class="svg-icon svg-icon-1 position-absolute ms-4">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                             viewBox="0 0 24 24" fill="none">
-                                                            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
-                                                                  height="2" rx="1"
-                                                                  transform="rotate(45 17.0365 15.1223)" fill="black"/>
-                                                            <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                                                  fill="black"/>
-                                                        </svg>
-                                                    </span>
-
-                            {% render_field filter.form.search class="form-control form-control-solid w-250px ps-14" %}
+                        <div class="d-flex flex-column">
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <span class="svg-icon svg-icon-1 position-absolute ms-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                         viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
+                                              height="2" rx="1"
+                                              transform="rotate(45 17.0365 15.1223)" fill="black"/>
+                                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                              fill="black"/>
+                                    </svg>
+                                </span>
+                                {% render_field filter.form.search class="form-control form-control-solid w-250px ps-14" %}
+                            </div>
 
                         </div>
 
-                        <div class="w-100 mw-150px">
 
+                        <div class="d-flex flex-column-fluid justify-content-end" data-toolbar="table_actions">
 
-                            {% render_field filter.form.technology class+="form-select form-select-solid" data-control="select2"%}
+                            <div class="d-flex flex-column gap-5 w-250px">
+                                {% render_field filter.form.technology class+="form-select form-select-solid" data-control="select2"%}
+
+                            </div>
+
+                            <div class="d-flex flex-column gap-5 ps-4">
+                                <button class="btn btn-sm btn-light btn-active-primary"
+                                                                                   >
+                                                            <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen031.svg-->
+                                                            <span class="svg-icon svg-icon-2x"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black"/>
+                                                            </svg></span>
+                                                            <!--end::Svg Icon-->
+
+                                                                                    <!--end::Svg Icon-->Filter</button>
+
+                            </div>
+                            <div class="d-flex flex-column gap-5 ps-4">
+                                <button type="button" onclick="window.location.href = window.location.href.split('?')[0];" class="btn btn-sm btn-light btn-active-primary"
+                                                                                   >
+                                                            <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen031.svg-->
+                                    <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr088.svg-->
+                                    <span class="svg-icon svg-icon-2x"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="7.05025" y="15.5356" width="12" height="2" rx="1" transform="rotate(-45 7.05025 15.5356)" fill="black"/>
+                                    <rect x="8.46447" y="7.05029" width="12" height="2" rx="1" transform="rotate(45 8.46447 7.05029)" fill="black"/>
+                                    </svg></span>
+                                    <!--end::Svg Icon-->
+                                                            <!--end::Svg Icon-->
+
+                                                                                    <!--end::Svg Icon-->Clear</button>
+
+                            </div>
 
                         </div>
+                        <div class="d-flex flex-column-fluid justify-content-end d-none" data-toolbar="bulk_actions">
 
-                        <button class="btn btn-sm btn-light btn-active-primary"
-                                                   >
-                            <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen031.svg-->
-                            <span class="svg-icon svg-icon-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black"/>
-                            </svg></span>
-                            <!--end::Svg Icon-->
+                            <div class="d-flex flex-column gap-5 ps-4">
 
-                                                    <!--end::Svg Icon-->Filter</button>
+                                <select id="bulk_actions_select" class="form-select form-select-solid"
+                                        data-control="select2" data-hide-search="true"
+                                        data-placeholder="Select bulk action"
+                                        data-kt-input="filter">
+                                    <option selected>--------</option>
+                                    <option value="delete">Delete Selected</option>
+                                    <option value="accept">Accept Selected Candidates</option>
+                                </select>
 
-                        <a href="{% url 'candidate_create' %}" class="btn btn-sm btn-light btn-active-primary" >
-                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                            <span class="svg-icon svg-icon-3">
-            												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                                 viewBox="0 0 24 24" fill="none">
-            													<rect opacity="0.5" x="11.364" y="20.364" width="16" height="2"
-                                                                      rx="1" transform="rotate(-90 11.364 20.364)"
-                                                                      fill="black"></rect>
-            													<rect x="4.36396" y="11.364" width="16" height="2" rx="1"
-                                                                      fill="black"></rect>
-            												</svg>
-            											</span>
-                            <!--end::Svg Icon-->New Candidate</a>
+                            </div>
+                            <div class="d-flex flex-column gap-5 ps-4">
+                                <button id="handle_selections" onclick="handleBulkAction()" type="button" class="btn btn-light btn-active-primary ">Go!</button>
+
+                            </div>
+
+                        </div>
                     </div>
+
                     </form>
                 </div>
                 <!--end::Header-->
@@ -96,10 +123,137 @@
     </div>
 
 
-
-
 {% endblock %}
 {% block scripts %}
     <script src="{% static 'frontend/js/delete_table_action.js' %}"></script>
+
+    <script>
+
+        const bulkdelete_url = "{% url 'candidate-bulk-delete' %}";
+        const checkboxes = document.querySelectorAll('[type="checkbox"]');
+        // Toggle delete selected toolbar
+        checkboxes.forEach(c => {
+            // Checkbox on click event
+            c.addEventListener('click', function (e) {
+                toggleCheckboxes(c);
+            });
+        });
+
+        // Toggle toolbars
+        var toggleCheckboxes = function (c) {
+            // Define variables
+
+            // Select refreshed checkbox DOM elements
+            const allCheckboxes = document.querySelectorAll('tbody [type="checkbox"]');
+            const headerCheckbox = document.querySelector('thead [type="checkbox"]');
+            const table_actions = document.querySelector('[data-toolbar="table_actions"]');
+            const bulk_actions = document.querySelector('[data-toolbar="bulk_actions"]');
+
+            if(headerCheckbox === c){
+                // selected all
+                allCheckboxes.forEach((ch)=>ch.checked=c.checked)
+                if(c.checked){
+                    table_actions.classList.add('d-none')
+                    bulk_actions.classList.remove('d-none')
+                }else{
+                    table_actions.classList.remove('d-none')
+                    bulk_actions.classList.add('d-none')
+                }
+
+            }else{
+                // Detect checkboxes state & count
+                let checkedState = false;
+                let count = 0;
+
+                // Count checked boxes
+                allCheckboxes.forEach(c => {
+                    if (c.checked) {
+                        checkedState = true;
+                        count++;
+                    }
+                });
+
+                // Toggle toolbars
+                if (checkedState) {
+
+                    table_actions.classList.add('d-none')
+                    bulk_actions.classList.remove('d-none')
+                    headerCheckbox.checked = count === allCheckboxes.length;
+
+                } else {
+
+                    table_actions.classList.remove('d-none')
+                    bulk_actions.classList.add('d-none')
+                    // unselect checkbox header if selected in case a sort is triggered after previously selecting all
+                    // records
+                    if (headerCheckbox.checked)
+                        headerCheckbox.checked = false;
+                }
+            }
+        }
+
+        function handleBulkAction(e){
+
+            e.preventDefault();
+            // get bulk action
+            var selection = document.getElementById("bulk_actions_select")
+            if(selection.value === 'delete'){
+                bulkDelete()
+
+            }else if(selection.value === 'accept'){
+                alert("accept")
+            }else{
+                // check processing
+            }
+        }
+
+        function bulkDelete(e){
+
+            Swal.fire({
+                text: "Are you sure you want to delete selected items?",
+                icon: "warning",
+                showCancelButton: true,
+                buttonsStyling: false,
+                showLoaderOnConfirm: true,
+                confirmButtonText: "Yes, delete!",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                },
+            }).then(function (result) {
+                if (result.value) {
+
+                    var ids = [];
+                    const allCheckboxes = document.querySelectorAll('tbody [type="checkbox"]:checked');
+
+                    // Count checked boxes
+                    allCheckboxes.forEach(c => ids.push(c.value));
+
+                    if (ids.length > 0)
+                        // Making our request using fetch for custom bulk delete since it does not work properly
+                        // using core api
+                        fetch(bulkdelete_url, {
+                            method: 'DELETE', headers: {
+                                'Content-type': 'application/json; charset=UTF-8'
+                            }, body: JSON.stringify({"ids": ids})
+                        })
+                        .then(function (resp) {
+                            window.location.href = window.location.href.split('?')[0];
+                        })
+                        .catch(errorMsg => {
+                            console.log(errorMsg);
+                        });
+                }
+            });
+        }
+
+        function acceptCandidates(e){
+
+
+        }
+    </script>
+
+
 
 {% endblock %}

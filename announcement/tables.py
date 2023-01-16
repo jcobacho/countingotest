@@ -3,7 +3,7 @@ import django_tables2 as tables
 # from core.tableMixins import TableMixinSelection
 
 from announcement.models import Announcement, Candidate
-from core.tables import TableMixinCounter
+from core.tables import TableMixinCounter, TableMixinSelection
 
 
 class AnnouncementTable(TableMixinCounter):
@@ -16,7 +16,7 @@ class AnnouncementTable(TableMixinCounter):
         fields = ("counter", "name", "actions")
 
 
-class CandidateTable(tables.Table):
+class CandidateTable(TableMixinSelection):
     actions = tables.columns.TemplateColumn(
         verbose_name="Actions", template_name="announcement/candidate/table_actions.html", orderable=False
     )
@@ -27,5 +27,4 @@ class CandidateTable(tables.Table):
 
     class Meta:
         model = Candidate
-        attrs = {'class': "table table-row-dashed table-row-gray-300"}
-        fields = ("announcement", "first_name", "ci", "sex", "age", "tech_years", "actions")
+        fields = ("selection", "announcement", "first_name", "ci", "sex", "age", "tech_years", "actions")
