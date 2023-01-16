@@ -21,7 +21,7 @@ from announcement.views import ListCandidatesView, ListAnnouncements, CreateAnno
 
 urlpatterns = [
 
-    path('annoucements/', ListAnnouncements.as_view(), name='announcement_list'),
+    path('', ListAnnouncements.as_view(), name='announcement_list'),
     path('annoucements/new/', CreateAnnouncementView.as_view(), name='announcement_create'),
     path('annoucements/<pk>/edit', UpdateAnnouncementView.as_view(), name='announcement_update'),
 
