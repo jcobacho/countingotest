@@ -1,5 +1,35 @@
 <div class="d-flex flex-shrink-0">
 
+    {% if not record.accepted %}
+        <a href="#" data-href="{% url 'candidate-accept' record.pk %}" data-action="buttons"
+           data-message="Are you sure you want to accept this candidate ?"
+           data-confirmbtn="btn fw-bold btn-success"
+           data-method="POST"
+           data-confirmbtntext="Yes, Accept!"
+           class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+            <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr085.svg-->
+            <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M9.89557 13.4982L7.79487 11.2651C7.26967 10.7068 6.38251 10.7068 5.85731 11.2651C5.37559 11.7772 5.37559 12.5757 5.85731 13.0878L9.74989 17.2257C10.1448 17.6455 10.8118 17.6455 11.2066 17.2257L18.1427 9.85252C18.6244 9.34044 18.6244 8.54191 18.1427 8.02984C17.6175 7.47154 16.7303 7.47154 16.2051 8.02984L11.061 13.4982C10.7451 13.834 10.2115 13.834 9.89557 13.4982Z" fill="black"/>
+            </svg></span>
+            <!--end::Svg Icon-->
+                </a>
+    {% else %}
+        <a href="#" download="report.csv" data-href="{% url 'candidate-decline' record.pk %}" data-action="buttons"
+           data-message="Are you sure you want to decline this candidate ?"
+          data-confirmbtn="btn fw-bold btn-danger"
+          data-method="POST"
+          data-confirmbtntext="Yes, Decline!"
+           class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+            <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr088.svg-->
+            <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <rect opacity="0.5" x="7.05025" y="15.5356" width="12" height="2" rx="1" transform="rotate(-45 7.05025 15.5356)" fill="black"/>
+            <rect x="8.46447" y="7.05029" width="12" height="2" rx="1" transform="rotate(45 8.46447 7.05029)" fill="black"/>
+            </svg></span>
+            <!--end::Svg Icon-->
+                </a>
+    {% endif %}
+
+
     <a href="{{ record.get_edit_url }}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
         <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
         <span class="svg-icon svg-icon-3">

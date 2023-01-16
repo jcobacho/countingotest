@@ -18,13 +18,21 @@ class AnnouncementTable(TableMixinCounter):
 
 class CandidateTable(TableMixinSelection):
     actions = tables.columns.TemplateColumn(
-        verbose_name="Actions", template_name="announcement/candidate/table_actions.html", orderable=False
+        verbose_name="Actions", template_name="announcement/candidate/table_actions.html", orderable=False,
     )
 
     tech_years = tables.columns.TemplateColumn(
         verbose_name="Tech-Years", template_name="announcement/candidate/table_tech_years.html", orderable=False
     )
 
+    accepted = tables.columns.BooleanColumn(
+        verbose_name="Accepted", orderable=False,
+    )
+
     class Meta:
         model = Candidate
-        fields = ("selection", "announcement", "first_name", "ci", "sex", "age", "tech_years", "actions")
+        fields = ("selection", "announcement", "user__first_name", "user__ci", "user__sex", "user__age", "accepted",
+                  "tech_years", "actions")
+
+    def value_tech_years(self, record):
+        return "\n".join([f'{c.tech.name} - {c.years_of_experience}' for c in record.candidatetech_set.all()])

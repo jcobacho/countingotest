@@ -4,9 +4,10 @@ User = get_user_model()
 # Create your models here.
 
 
-class Developer(User):
-    # keep class for future relationships of the developers
-    class Meta(User.Meta):
+class Developer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    class Meta:
         verbose_name = "Developer"
         verbose_name_plural = "Developers"
 

@@ -6,6 +6,7 @@ django-tables2
 django-widget-tweaks
 django-rest-auth
 python-decouple
+tablib
 
 # F
 factory-boy

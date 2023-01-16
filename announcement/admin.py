@@ -38,11 +38,11 @@ def mark_selected(self, request, queryset):
 
 @admin.register(Candidate)
 class CandidateAdmin(admin.ModelAdmin):
-    list_display = ('id', 'first_name', 'last_name', 'ci', 'announcement', 'age', 'sex', 'get_techs')
+    list_display = ('id', 'user', 'get_techs')
     search_fields = ('first_name', 'last_name')
-    list_filter = ('announcement', 'sex')
+    list_filter = ('announcement', 'user__sex')
 
-    fields = ['first_name', 'middle_name', 'last_name', 'ci', 'address', 'age', 'sex', 'announcement']
+    fields = ['user', 'announcement']
     # fields = ['user', 'announcement']
     inlines = [
         TechItemInline

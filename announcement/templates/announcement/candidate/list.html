@@ -87,11 +87,12 @@
                                     <option selected>--------</option>
                                     <option value="delete">Delete Selected</option>
                                     <option value="accept">Accept Selected Candidates</option>
+                                    <option value="decline">Decline Selected Candidates</option>
                                 </select>
 
                             </div>
                             <div class="d-flex flex-column gap-5 ps-4">
-                                <button id="handle_selections" onclick="handleBulkAction()" type="button" class="btn btn-light btn-active-primary ">Go!</button>
+                                <button id="handle_selections" onclick="handleBulkAction(event);" type="button" class="btn btn-light btn-active-primary ">Go!</button>
 
                             </div>
 
@@ -125,11 +126,13 @@
 
 {% endblock %}
 {% block scripts %}
-    <script src="{% static 'frontend/js/delete_table_action.js' %}"></script>
+    <script src="{% static 'frontend/js/table_action_btn.js' %}"></script>
 
     <script>
 
         const bulkdelete_url = "{% url 'candidate-bulk-delete' %}";
+        const bulkaccept_url = "{% url 'candidate-bulk-accept' %}";
+        const bulkdecline_url = "{% url 'candidate-bulk-decline' %}";
         const checkboxes = document.querySelectorAll('[type="checkbox"]');
         // Toggle delete selected toolbar
         checkboxes.forEach(c => {
@@ -199,11 +202,11 @@
             var selection = document.getElementById("bulk_actions_select")
             if(selection.value === 'delete'){
                 bulkDelete()
-
             }else if(selection.value === 'accept'){
-                alert("accept")
-            }else{
+                bulkAccept(e)
+            }else if(selection.value === 'decline'){
                 // check processing
+                bulkDecline(e)
             }
         }
 
@@ -248,8 +251,87 @@
             });
         }
 
-        function acceptCandidates(e){
+        function bulkAccept(e){
 
+            Swal.fire({
+                            text: "Are you sure you want to accept selected candidates?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            buttonsStyling: false,
+                            showLoaderOnConfirm: true,
+                            confirmButtonText: "Yes, Accept!",
+                            cancelButtonText: "No, cancel",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-success",
+                                cancelButton: "btn fw-bold btn-active-light-primary"
+                            },
+                        }).then(function (result) {
+                            if (result.value) {
+
+                                var ids = [];
+                                const allCheckboxes = document.querySelectorAll('tbody [type="checkbox"]:checked');
+
+                                // Count checked boxes
+                                allCheckboxes.forEach(c => ids.push(c.value));
+
+                                if (ids.length > 0)
+                                    // Making our request using fetch for custom bulk delete since it does not work properly
+                                    // using core api
+                                    fetch(bulkaccept_url, {
+                                        method: 'POST', headers: {
+                                            'Content-type': 'application/json; charset=UTF-8'
+                                        }, body: JSON.stringify({"ids": ids})
+                                    })
+                                    .then(function (resp) {
+                                        window.location.href = window.location.href.split('?')[0];
+                                    })
+                                    .catch(errorMsg => {
+                                        console.log(errorMsg);
+                                    });
+                            }
+                        });
+
+        }
+
+        function bulkDecline(e){
+
+            Swal.fire({
+                text: "Are you sure you want to decline selected candidates?",
+                icon: "warning",
+                showCancelButton: true,
+                buttonsStyling: false,
+                showLoaderOnConfirm: true,
+                confirmButtonText: "Yes, Decline!",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                },
+            }).then(function (result) {
+                if (result.value) {
+
+                    var ids = [];
+                    const allCheckboxes = document.querySelectorAll('tbody [type="checkbox"]:checked');
+
+                    // Count checked boxes
+                    allCheckboxes.forEach(c => ids.push(c.value));
+
+                    if (ids.length > 0)
+                        // Making our request using fetch for custom bulk delete since it does not work properly
+                        // using core api
+                        fetch(bulkdecline_url, {
+                            method: 'POST', headers: {
+                                'Content-type': 'application/json; charset=UTF-8'
+                            }, body: JSON.stringify({"ids": ids})
+                        })
+                        .then(function (resp) {
+                            window.location.href = window.location.href.split('?')[0];
+                        })
+                        .catch(errorMsg => {
+                            console.log(errorMsg);
+                        });
+                }
+            });
 
         }
     </script>

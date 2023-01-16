@@ -35,14 +35,19 @@ class Technology(models.Model):
         return self.name
 
 
-class Candidate(User):
+class Candidate(models.Model):
 
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     techs = models.ManyToManyField(Technology, through='CandidateTech')
     announcement = models.ForeignKey(Announcement, on_delete=models.CASCADE, related_name='candidates')
 
-    class Meta(User.Meta):
+    class Meta:
         verbose_name = "Candidate"
         verbose_name_plural = "Candidates"
+
+    @property
+    def accepted(self):
+        return hasattr(self.user, 'developer')
 
     def get_edit_url(self):
         return reverse("candidate_update", kwargs={"pk": self.pk})
