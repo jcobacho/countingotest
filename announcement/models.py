@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.urls import reverse
 
@@ -59,7 +60,7 @@ class Candidate(models.Model):
 class CandidateTech(models.Model):
     tech = models.ForeignKey(Technology, on_delete=models.CASCADE)
     candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
-    years_of_experience = models.PositiveSmallIntegerField()
+    years_of_experience = models.PositiveSmallIntegerField(validators=[MinValueValidator(1)])
 
     class Meta:
         verbose_name = "Technology"

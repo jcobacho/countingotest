@@ -1,72 +1,30 @@
-from decimal import Decimal
-
 import factory
 from django.contrib.auth import get_user_model
-from django.contrib.contenttypes.models import ContentType
-from taggit.models import TaggedItem, Tag
 
-from inventory.models import Variation, VariationCategory, Product, Category
+from announcement.models import Announcement, Technology
 from core.faker import faker
 
 User = get_user_model()
 
 
-class CategoryFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Category
-    name = factory.Iterator(['Drinks', "Hamburgers", "Pizza"])
-
-
-class ProductFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Product
-
-    name = faker.name()
-    description = faker.text()
-    current_price = factory.lazy_attribute(lambda p: p.price)
-
-    category = factory.SubFactory(CategoryFactory)
-
-
-class VariationCategoryFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = VariationCategory
-
-    name = factory.Iterator(['Color', "Size", "Package"])
-    description = factory.LazyAttribute(lambda _: faker.text())
-
-
-class VariationFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Variation
-
-    variation_category = factory.SubFactory(VariationCategoryFactory)
-    product_group = factory.SubFactory(ProductFactory)
-
-
-class TaggedItemFactory(factory.django.DjangoModelFactory):
-    object_id = factory.SelfAttribute('content_object.id')
-    content_type = factory.LazyAttribute(
-        lambda o: ContentType.objects.get_for_model(o.content_object))
+class UserFactory(factory.django.DjangoModelFactory):
 
     class Meta:
-        exclude = ['content_object']
-        abstract = True
+        model = User
+
+    first_name = faker.unique.last_name()
+    last_name = faker.unique.last_name()
+    username = faker.user_name()
 
 
-class TagFactory(factory.django.DjangoModelFactory):
+class AnnouncementFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = Tag
+        model = Announcement
+    name = factory.Iterator(['Oddo Course', "Fullstack 2022 full course", "Free Design Course"])
 
-    name = factory.Iterator(['red', 'yellow', 'green'])
 
-
-class OptionVariationFactory(TaggedItemFactory):
-    content_object = factory.SubFactory(VariationFactory)
-    tag = factory.SubFactory(TagFactory)
-
+class TechnologyFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = TaggedItem
-
-
+        model = Technology
+    name = faker.unique.name()
 

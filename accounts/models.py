@@ -2,13 +2,22 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.gis.db import models
 
 # Create your models here.
+from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
 from django.utils.translation import ugettext_lazy as _
+
+
+def has11digits(value):
+    if value.isdigit() == False:
+        raise ValidationError(_("Must provide only digits"))
+    if len(value) != 11:
+        raise ValidationError(_("Must provide 11 digits"))
 
 
 class User(AbstractUser):
     SEX_CHOICES = (
-        ('MALE', 'm'),
-        ('FEMALE', 'f'),
+        ('m', 'MALE'),
+        ('F', 'FEMALE'),
     )
 
     username = models.CharField(
@@ -28,9 +37,9 @@ class User(AbstractUser):
     middle_name = models.CharField(max_length=150, blank=True)
     last_name = models.CharField(max_length=150)
 
-    ci = models.CharField(max_length=11, unique=True, null=True)
+    ci = models.CharField(max_length=11, unique=True, null=True, validators=[has11digits])
     address = models.TextField(null=True)
-    age = models.PositiveSmallIntegerField(null=True)
+    age = models.PositiveSmallIntegerField(null=True, validators=[MinValueValidator(18)])
     sex = models.CharField(choices=SEX_CHOICES, max_length=6, null=True)
 
     REQUIRED_FIELDS = ['first_name', 'last_name']
